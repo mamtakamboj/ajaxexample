@@ -1,0 +1,48 @@
+<html>
+<head>
+<title> Ajax </title>
+<script type="text/javascript">
+var XMLHttpRequestObject = false;
+if (window.XMLHttpRequest) {
+XMLHttpRequestObject = new XMLHttpRequest();
+} else if (window.ActiveXObject) {
+XMLHttpRequestObject =
+new ActiveXObject("Microsoft.XMLHTTP");
+}
+function getData(datasource, divID) {
+if (XMLHttpRequestObject) {
+var obj = document.getElementById(divID);
+XMLHttpRequestObject.open("GET", datasource, true);
+XMLHttpRequestObject.onreadystatechange = function () {
+if (XMLHttpRequestObject.readyState == 4
+&& XMLHttpRequestObject.status == 200) {
+obj.innerHTML = XMLHttpRequestObject.responseText;
+}
+}
+XMLHttpRequestObject.send(null);
+}
+}
+</script>
+</head>
+<body>
+<h1> Get Data with Ajax </h1>
+<form>
+<input type="button" value="Display Message" onclick = "getData('AjaxGreek.txt', 'targetDiv')">
+</form>
+<div id="targetDiv">
+<p> Here's the data </p>
+<p>
+	<table>
+		<tr>
+			<td><img src="AjaxAmsterdam.jpg" onmouseover="getData('AjaxAmsterdam.txt','ajaxDesc')" /></td>
+			<td><img src="AjaxBleach.jpg" onmouseover="getData('AjaxBleach.txt','ajaxDesc')" /></td>
+			<td><img src="AjaxGreek.jpg" onmouseover="getData('AjaxGreek.txt','ajaxDesc')" /></td>
+			<td><img src="AjaxSchematic.jpg" onmouseover="getData('AjaxSchematic.txt','ajaxDesc')" /></td>
+		</tr>
+	</table>
+	<div id="ajaxDesc"></div>
+</p>
+</div>
+</body>
+</html>
+
